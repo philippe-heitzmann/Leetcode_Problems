@@ -82,4 +82,52 @@ class MovingAverage:
 
 # Your MovingAverage object will be instantiated and called as such:
 # obj = MovingAverage(size)
-# param_1 = obj.next(val) 
+# param_1 = obj.next(val)
+
+
+#146. LRU Cache - Medium 
+
+from collections import OrderedDict 
+
+class LRUCache(OrderedDict):
+
+    def __init__(self, capacity: int):
+
+        self.capacity = capacity
+
+    def get(self, key: int) -> int:
+        
+        if key not in self:
+            return -1
+        
+        self.move_to_end(key)
+        
+        return self[key]
+            
+    def put(self, key: int, value: int) -> None:
+        
+        if key in self:
+            self.move_to_end(key)
+            
+        self[key] = value
+        
+        if len(self) > self.capacity:
+            self.popitem(last = False)
+
+# 70. Climbing Stairs - Easy
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        
+        if n <= 2:
+            return n
+            
+        newlist = [0] * n
+        
+        newlist[0] = 1
+        newlist[1] = 2
+        
+        for g in range(2,n):
+            newlist[g] = newlist[g-2] + newlist[g-1]
+            
+        return newlist[n-1] 
