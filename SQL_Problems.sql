@@ -38,3 +38,13 @@ SELECT
         LIMIT 1 OFFSET 1),
     NULL) AS SecondHighestSalary;
 
+
+#1322. Ads Performance - Easy
+
+select ad_id, 
+coalesce(round(sum(case when Ads.action = "Clicked" then 1 else 0 end)/
+        sum(case when Ads.action = "Clicked" or Ads.action = "Viewed" then 1 else 0 end)*100,2),0)
+        as ctr
+from Ads 
+group by ad_id
+order by ctr DESC, ad_id ASC
