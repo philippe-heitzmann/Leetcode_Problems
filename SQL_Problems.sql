@@ -47,4 +47,46 @@ coalesce(round(sum(case when Ads.action = "Clicked" then 1 else 0 end)/
         as ctr
 from Ads 
 group by ad_id
-order by ctr DESC, ad_id ASC
+order by ctr DESC, ad_id ASC;
+
+#595. Big Countries - Easy
+
+select name, population, area 
+from World 
+where population > 25000000 or area > 3000000
+;
+
+#620. Not Boring Movies - easy 
+
+select id, movie, description, rating 
+from cinema 
+where id % 2 != 0 and description not like '%boring%'
+order by rating DESC;
+
+#182. Duplicate Emails
+
+select distinct Email from Person
+group by Email
+having count(Email) > 1;
+
+
+#181. Employees Earning More Than Their Managers
+
+select x.Name as Employee 
+from Employee x join Employee y on x.ManagerId = y.Id
+where x.Salary > y.Salary;
+
+#183. Customers Who Never Order
+
+select Name as Customers
+from Customers left join Orders on Customers.Id=Orders.CustomerId
+where CustomerId IS NULL;
+
+#596. Classes More Than 5 Students
+
+select class 
+from courses
+group by class
+having count(distinct student) >= 5;
+
+
