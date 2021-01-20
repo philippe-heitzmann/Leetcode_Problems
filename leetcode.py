@@ -130,4 +130,22 @@ class Solution:
         for g in range(2,n):
             newlist[g] = newlist[g-2] + newlist[g-1]
             
-        return newlist[n-1] 
+        return newlist[n-1]
+
+#395. Longest Substring with At Least K Repeating Characters
+
+from collections import Counter 
+
+class Solution:
+    def longestSubstring(self, s,k):
+    
+        newCounter = Counter(s)
+        
+        for j in newCounter.items():
+            if j[1] < k:
+                s1, s2 = s.split(j[0],1)
+                return max(self.longestSubstring(s1, k), self.longestSubstring(s2, k))
+            else:
+                continue
+        
+        return len(s) 
