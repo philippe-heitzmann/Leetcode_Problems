@@ -166,3 +166,15 @@ select id, name
 from Students
 where department_id not in(
 select id from Departments);
+
+#1693. Daily Leads and Partners - Easy
+
+select distinct date_id, make_name, count(distinct lead_id) as unique_leads, count(distinct partner_id) as unique_partners
+from DailySales
+group by date_id, make_name;
+
+#1571. Warehouse Manager - Easy
+
+select name as warehouse_name, sum(Width * Length * Height * units) as volume
+from Warehouse left join Products on Warehouse.product_id = Products.product_id
+group by name;

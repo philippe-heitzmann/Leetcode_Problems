@@ -148,4 +148,18 @@ class Solution:
             else:
                 continue
         
-        return len(s) 
+        return len(s)
+
+#1470. Shuffle the Array - Easy
+
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        
+        s1, s2 = nums[:n], nums[n:]
+        
+        answer = []
+        
+        for x in range(n):
+            answer.append(s1[x])
+            answer.append(s2[x])
+            
+        return answer 
