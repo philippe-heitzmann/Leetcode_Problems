@@ -162,4 +162,77 @@ class Solution:
             answer.append(s1[x])
             answer.append(s2[x])
             
-        return answer 
+        return answer
+
+
+#1672. Richest Customer Wealth
+
+import numpy as np 
+
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        return max([np.sum(x) for x in accounts])
+        
+#1689. Partitioning Into Minimum Number Of Deci-Binary Numbers - Medium 
+
+class Solution:
+    def minPartitions(self, n: str) -> int:
+        return max([x for x in n])
+
+#1570. Dot Product of Two Sparse Vectors - Medium
+
+import numpy as np 
+
+class SparseVector:
+    def __init__(self, nums: List[int]):
+        self.v = nums
+
+    # Return the dotProduct of two sparse vectors
+    def dotProduct(self, vec: 'SparseVector') -> int:
+        
+        return max(np.sum([self.v[x] * vec.v[x] for x in range(len(vec.v))]),0)
+
+807. Max Increase to Keep City Skyline - Medium
+
+class Solution:
+    def maxIncreaseKeepingSkyline(self, grid: List[List[int]]) -> int:
+        
+        row_max = [max(row) for row in grid]
+        col_max = [max(col) for col in zip(*grid)]
+
+        return sum(min(row_max[r], col_max[c]) - val
+                   for r, row in enumerate(grid)
+                   for c, val in enumerate(row))
+
+#1282. Group the People Given the Group Size They Belong To - Medium        
+        
+class Solution:
+    def groupThePeople(self, groupSizes):
+        index_count_map = dict()
+        for idx, ele in enumerate(groupSizes):
+            if ele in index_count_map:
+                index_count_map[ele].append(idx)
+            else:
+                index_count_map[ele] = [idx]
+        list_of_groups = []
+        for key, val in index_count_map.items():
+            list_of_groups += zip(*[iter(val)] * key)
+        return list_of_groups
+    
+1678. Goal Parser Interpretation - Easy
+
+    def interpret(self, command: str) -> str:
+        
+        output = ''
+        
+        for idx, g in enumerate(command):
+            if g == 'G':
+                output += 'G'
+            elif g == '(' and command[idx+1] == ')':
+                output += 'o'
+            elif g == '(' and command[idx+1] == 'a':
+                output += 'al'
+            else:
+                continue
+        
+        return output 

@@ -178,3 +178,61 @@ group by date_id, make_name;
 select name as warehouse_name, sum(Width * Length * Height * units) as volume
 from Warehouse left join Products on Warehouse.product_id = Products.product_id
 group by name;
+
+#1729. Find Followers Count - Easy
+
+select user_id, count(distinct follower_id) as followers_count
+from Followers 
+group by user_id;
+
+#1075. Project Employees I - Easy
+
+select project_id, round(avg(experience_years),2) as average_years 
+from Project join Employee on Project.employee_id = Employee.employee_id
+group by project_id;
+
+
+
+#511. Game Play Analysis I - Easy
+
+select player_id, min(event_date) as first_login
+from Activity
+group by player_id;
+
+#1308. Running Total for Different Genders - Medium
+
+select gender, day, sum(score_points) over(partition by gender order by day) as total 
+from Scores;
+
+#1587. Bank Account Summary II - Easy
+
+select name, sum(amount) as balance 
+from Users join Transactions on Users.account = Transactions.account
+group by name
+having balance > 10000;
+
+#1270. All People Report to the Given Manager - Medium
+
+select e1.employee_id 
+from Employees e1 
+join Employees e2 on e1.manager_id = e2.employee_id
+join Employees e3 on e3.employee_id = e2.manager_id
+join Employees e4 on e4.employee_id = e3.manager_id
+where e4.manager_id = 1 and e1.employee_id <> 1;
+
+#1378. Replace Employee ID With The Unique Identifier - Easy
+
+
+select EmployeeUNI.unique_id as unique_id, name
+from Employees left join EmployeeUNI on Employees.id = EmployeeUNI.id;
+
+#1683. Invalid Tweets - Easy 
+
+select tweet_id from Tweets where length(content) > 15;
+
+#1068. Product Sales Analysis I
+
+select product_name, Sales.year, price
+from Sales left join Product on Sales.product_id = Product.product_id;
+
+ 
