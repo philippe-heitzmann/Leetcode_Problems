@@ -235,4 +235,58 @@ select tweet_id from Tweets where length(content) > 15;
 select product_name, Sales.year, price
 from Sales left join Product on Sales.product_id = Product.product_id;
 
- 
+#1050. Actors and Directors Who Cooperated At Least Three Times - Easy
+
+select actor_id, director_id 
+from ActorDirector
+group by actor_id, director_id
+having count(timestamp) >= 3;
+
+#1148. Article Views I - Easy
+
+select distinct author_id as id
+from Views 
+where author_id = viewer_id
+order by author_id asc;
+
+
+
+#1076. Project Employees II - Easy
+
+select project_id 
+from Project
+group by project_id
+having count(*) =
+(select max(total_employees)
+ from (select count(*) as total_employees
+      from Project
+      group by project_id) as Temp);
+
+
+#1069. Product Sales Analysis II - Easy
+
+# Write your MySQL query statement below
+
+select product_id, sum(quantity) as total_quantity
+from Sales
+group by product_id;
+
+#1407. Top Travellers - Easy
+
+select name, coalesce(sum(distance),0) as travelled_distance
+from Users left join Rides on Users.id = Rides.user_id
+group by name
+order by travelled_distance desc, name asc;
+
+#1741. Find Total Time Spent by Each Employee - Easy
+
+select event_day as day, emp_id, sum(out_time - in_time) as total_time
+from Employees
+group by emp_id, day;
+
+#1581. Customer Who Visited but Did Not Make Any Transactions - Easy
+
+select customer_id, SUM(CASE WHEN transaction_id IS NULL THEN 1 ELSE 0 END) as count_no_trans
+from Visits left join Transactions on Visits.visit_id = Transactions.visit_id
+group by customer_id
+having count_no_trans > 0; 
